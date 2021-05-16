@@ -1,0 +1,38 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block style %}
+    <!-- <link rel="stylesheet" href="{% static 'css/includes/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/accounts/password_reset_complete.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'css/jcr/import_into_table_jcr.css' %}">
+{% endblock %}
+
+{% block title %}
+    پرکردن جدول مقالات jcr
+{% endblock %}
+
+{% block content %} 
+
+<div>
+    <p id="import">
+        در تلاشیم برای import داده ها داخل پایگاه داده.
+    </p>
+    <button type="button" id="bb">وارد کردن از فایل اکسل</button>
+</div>
+
+<br />
+<br />
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="myfile">
+    <button type="submit">Upload</button>
+  </form>
+{% endblock %}
+        
+{% block footer%}
+       
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js\jcr\import_into_table_jcr.js' %}"></script>
+{% endblock %}
+

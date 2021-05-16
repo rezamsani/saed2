@@ -1,0 +1,118 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block style %}    
+    <!-- <link rel="stylesheet" href="{% static 'css/' %}"> -->
+{% endblock %}
+
+ 
+{% block title %}
+    لیست مقالات
+{% endblock %}
+
+{% block navbar%}
+{% endblock %}
+
+{% block content %}    
+    <div class="container-fluid" style="min-height: 55vh;">
+        <div class="row"> 
+            <div class="col-12" id="main-right">
+                <br/>
+                {% if article_with_score%}                
+                    <div class="container-fluid" style="min-height: 60vh;">
+                        <div class="row"> 
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" id="main-right">                                 
+                                <div class="table-responsive">
+                                    <table class="table-bordered table-hover table-striped">
+                                        <thead>                    
+                                            <tr> 
+                                                <th>ردیف</th>                                                 
+                                                <th>نام مقاله</th>
+                                                <th>نام ژورنال jcr</th>
+                                                <th>ISSN</th>
+                                                <th>ضریب تاثیر</th>
+                                                <th>کیفیت مقاله</th>
+                                                <th>نویسنده مسئول است؟</th>
+                                                <th>تعداد نویسندگان مقاله</th>
+                                                <th>امتیاز مقاله</th>                                                
+                                                <th>نام کاربر</th>                                        
+                                            </tr>
+                                        </thead>                                                                
+                                        <tbody>
+                                            {% for article in article_with_score%}  
+                                                <tr>                                                                     
+                                                     <td>{{ forloop.counter}}</td>                                                                               
+                                                     <td class="font-time">
+                                                        {{article.name_of_article}}                                                                                                                
+                                                    </td> 
+                                                    <td>
+                                                        {{article.name_journal_jcr}}
+                                                    </td>                                                   
+                                                    <td>
+                                                        {{article.jcr_issn}}
+                                                    </td>
+                                                    <td>
+                                                        {{article.impact_factor}}
+                                                    </td>                                                    
+                                                    {% if article.quality == "1" %}
+                                                        <td>
+                                                            Q1
+                                                        </td>
+                                                    {% elif article.quality == "2"  %}
+                                                        <td>
+                                                            Q2
+                                                        </td>
+                                                    {% elif article.quality == "3"  %}
+                                                        <td>
+                                                            Q3
+                                                        </td>
+                                                    {% elif article.quality == "4"  %}
+                                                        <td>
+                                                            Q4
+                                                        </td>
+                                                    {% endif %}
+                                                    {% if article.is_writer_responsible == '1' %}
+                                                        <td>بله</td>
+                                                    {% else %}
+                                                        <td>خیر</td>
+                                                    {% endif %}
+                                                    {% if article.number_of_authour == "6" %}
+                                                    <td>
+                                                        شش یا بیشتر                                                                                                                
+                                                    </td>
+                                                    {% else %}
+                                                    <td>
+                                                        {{article.number_of_authour}}
+                                                    </td>
+                                                    {% endif %}
+                                                    <td>
+                                                        {{article.score_article}} 
+                                                    </td>    
+                                                    <td>
+                                                        {{article.user}}
+                                                    </td>                                        
+                                                </tr>
+                                            {% endfor %}                                       
+                                        </tbody>          
+                                    </table>            
+                                </div>
+                            </div>
+                        </div>
+                    </div>                   
+                {% else %}
+                <div class="container-fluid">  
+                    <strong class="text-danger"> 
+                        مقاله‌ای وجود ندارد.
+                    </strong>                     
+                </div>                                                                        
+                {% endif %}
+            </div>            
+        </div>
+    </div>    
+{% endblock %}
+        
+{% block footer%}
+{% endblock %}
+
+{% block js %}    
+{% endblock %}

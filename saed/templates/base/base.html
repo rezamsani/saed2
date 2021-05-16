@@ -1,0 +1,45 @@
+{% load static %}
+{% load i18n %}
+<!doctype html>
+<html lang="fa" dir="rtl">
+    <head> 
+        <!-- Required meta tags -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta charset="UTF-8">
+        {% block meta %}{% endblock %} 
+
+        <!-- <link rel="shortcut icon" href="{% static 'favicon.ico' %}"> -->
+        <!-- <link rel="stylesheet" href="{% static 'css/base/base.css' %}"> -->
+        <link rel="stylesheet" href="{% static 'third-parity-library/bootstrap/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'third-parity-library/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'third-parity-library/bootstrap/css/bootstrap.css.map' %}">
+        <link rel="stylesheet" href="{% static 'third-parity-library/bootstrap/css/bootstrap.min.css.map' %}">
+        <link rel="stylesheet" href="{% static 'third-parity-library/bootstrap/css/bootstrap-rtl.css' %}">
+        <link rel="stylesheet" href="{% static 'third-parity-library/font_awesome/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+        <!-- <link rel="stylesheet" href="{% static 'css/includes/footer.css' %}"> -->
+        <link rel="stylesheet" href="{% static 'css/jcr/base/font.css' %}">
+        <!-- C:\Users\Reza\Desktop\Saed\saed\static\css\jcr\base\font.css -->
+        {% block style %}{% endblock %}
+
+        <title>{% trans 'ساعد'%} | {% block title %}{% endblock %}</title>
+    </head>
+    
+    <body style="font-family: b-nazanin;">
+
+        {% block content %}{% endblock %}        
+        {% block footer%}{% endblock %}
+
+        <script src="{% static 'third-parity-library/jQuery/jquery.min.js' %}"></script>
+        <script src="{% static 'third-parity-library/poper/popper.min.js' %}"></script>
+        <script src="{% static 'third-parity-library/bootstrap/js/bootstrap.min.js' %}"></script>
+        <!-- <script src="{% static 'js/base/base.js' %}"></script>
+        <script src="{% static 'js/asset/all_asset.js' %}"></script> -->
+        
+        {% block js %}{% endblock %}
+        <div>
+            <div class="loader" style="left: 50%; top: 300px; position: absolute;visibility: hidden; z-index: 10000;"></div>
+        </div>
+        
+    </body>
+</html>

@@ -1,0 +1,53 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block style %}    
+    <!-- <link rel="stylesheet" href="{% static 'css/' %}"> -->
+    
+{% endblock %}
+
+ 
+{% block title %}
+    صفحه اصلی
+{% endblock %}
+
+{% block navbar%}
+{% endblock %}
+
+{% block content %}        
+    <div class="container-fluid mt-3">        
+        <div class="row" >
+            <div class="col-1">
+                <a href="{% url 'home_page_after_login' %}">
+                    صفحه اصلی
+                </a>
+            </div>
+            <div class="col-1">
+                <a href="{% url 'jcr:show_all_articles' %}">
+                    نمایش  مقالات
+                </a>
+            </div> 
+            <div class="col-1">
+                <a href="{% url 'jcr:create_score_article' %}">
+                    ایجاد یک مقاله
+                </a>
+            </div>
+            <div class="col-2">
+                <a href="{% url 'jcr:import_into_table_jcr' %}">
+                    وارد کردن اکسل لیست مجلات
+                </a>
+            </div> 
+            <div class="col-2">
+                <a href="{% url 'jcr:export_from_table_jcr' %}">
+                    خروجی پایگاه داده
+                </a>
+            </div>                                              
+       </div>
+    </div>    
+{% endblock %}
+        
+{% block footer%}
+{% endblock %}
+
+{% block js %}    
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/base/base_with_nav_after_login.css' %}">
+{% endblock %}
+{% block  header%}
+    {% include '../includes/header.html' %}
+{% endblock %}
+{% block footer%}
+{% include '../includes/footer.html' %}
+{% endblock %}

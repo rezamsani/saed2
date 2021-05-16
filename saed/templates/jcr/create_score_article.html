@@ -1,0 +1,113 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block style %}
+    <!-- <link rel="stylesheet" href="{% static 'css/includes/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/accounts/password_reset_complete.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'css/jcr/import_into_table_jcr.css' %}">
+    <link rel="stylesheet" href="{% static 'third-parity-library/jquery_autocomplete/styles.css' %}">
+{% endblock %}
+
+{% block title %}
+    پرکردن جدول مقالات jcr
+{% endblock %}
+
+{% block content %} 
+
+<br />
+    <div class="container-fluid">
+        <div class="row"> 
+            <div class="col-12" id="main-right">               
+                <div class="card card-create-asset">
+                    <div class="card-header">
+                        <h6>
+                            لطفا اطلاعات مقاله خود را به دقت وارد کنید.
+                        </h6>
+                    </div>                     
+                    <div class="card-body">                        
+                        <form class="form" method="POST" role="form" autocomplete="off" novalidate>
+                            <h3 class="card-title card-title-create-asset"> ایجاد مقاله جدید</h3>   
+                            <div class="row-12">
+                                {% if form.errors %}                                
+                                    {% for error in form.non_field_errors %}
+                                        <strong class="text-danger"> 
+                                            {{ error|escape }}
+                                        </strong> 
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="autocomplete" class="form-group" style="width: 100%;">
+                                {{ form.type_of_regulations|as_crispy_field  }}
+                            </div>                           
+                            <div class="autocomplete" class="form-group" style="width: 100%;">
+                                {{ form.name_of_article|as_crispy_field  }}
+                            </div> 
+                            <!-- <div class="autocompleteone" class="form-group" style="width: 100%;"> -->
+                                {{ form.name_journal_jcr|as_crispy_field }}                
+                            <!-- </div> -->                            
+                            <div class="autocomplete" class="form-group" style="width: 100%;">
+                                {{ form.is_writer_responsible|as_crispy_field  }}
+                            </div>   
+                            <div class="autocomplete" class="form-group" style="width: 100%;">
+                                {{ form.number_of_authour|as_crispy_field  }}
+                            </div>                    
+                            <div class="autocomplete" class="form-group" style="width: 100%;">
+                                {{ form.year_of_publish|as_crispy_field  }}
+                            </div>                             
+                            <div class="autocomplete" class="form-group" style="width: 100%;">
+                                {{ form.is_abstract|as_crispy_field  }}
+                            </div> 
+                            <button type="submit" class="fa-icon btn btn-primary btn_create_socre_article">
+                                ذخیره
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                            </button>
+                            {% csrf_token %}
+                        </form>    
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>  
+
+{% endblock %}
+        
+{% block footer%}
+       
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js\jcr\import_into_table_jcr.js' %}"></script>
+    <script src="{% static 'third-parity-library/jquery_autocomplete/jquery.autocomplete.js' %}"></script>
+
+    <script>
+
+$(document).ready(function(){
+    var options_json_JCRName_jcr = {{ json_JCRName_jcr|safe }}; 
+    $("#name_journal_jcr_input").autocomplete({
+        lookup: options_json_JCRName_jcr,
+        onSelect: function (suggestion) {
+      var name_journal_jcr = $(this).val();
+
+      $.ajax({
+        url: '{% url "jcr:create_score_article"%}',
+        data: {
+          'name_journal_jcr': name_journal_jcr
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("A user with this username already exists.");
+          }
+        }
+      });
+    },
+    lookupFilter: function (suggestion, query, queryLowerCase) {
+            return suggestion.value.toLowerCase().startsWith(queryLowerCase);
+        }
+    }); 
+});
+
+    </script>
+{% endblock %}
+
